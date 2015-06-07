@@ -1,7 +1,6 @@
 package ru.staddy.supremesense;
 
-import org.testng.Assert;
-import org.testng.annotations.Test;
+import org.junit.Test;
 
 /**
  * Created by stad on 17.05.15.

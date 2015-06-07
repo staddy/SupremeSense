@@ -1,6 +1,5 @@
 package ru.staddy.supremesense.screen;
 
-import ru.staddy.supremesense.*;
 import ru.staddy.supremesense.Art;
 import ru.staddy.supremesense.Input;
 import ru.staddy.supremesense.SupremeSense;
@@ -35,7 +34,7 @@ public class Screen {
             for (int ys=0; ys<chars.length; ys++) {
                 int xs = chars[ys].indexOf(ch);
                 if (xs>=0) {
-                    g.drawImage(Art.guys[xs][ys+9], x+i*6, y, null);
+                    g.drawImage(Art.symbols[xs][ys], x+i*6, y, null);
                 }
             }
         }

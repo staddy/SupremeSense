@@ -5,16 +5,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Art {
-    public static BufferedImage[][] guys = split(load("/guys.png"), 6, 6);
-    public static BufferedImage[][] player1 = split(load("/player.png"), 16, 32);
-    public static BufferedImage[][] player2 = mirrorsplit(load("/player.png"), 16, 32);
-    public static BufferedImage[][] walls = split(load("/walls.png"), 10, 10);
-    public static BufferedImage[][] gremlins = split(load("/gremlins.png"), 30, 30);
-    public static BufferedImage bg = scale(load("/background.png"), 8);
-    public static BufferedImage level = load("/levels.png");
-    public static BufferedImage titleScreen = load("/titlescreen.png");
-    public static BufferedImage winScreen1 = load("/winscreen1.png");
-    public static BufferedImage winScreen2 = load("/winscreen2.png");
+    public static BufferedImage[][] symbols = split(load("/res/symbols.png"), 6, 6);
 
     public static BufferedImage load(String name) {
         try {
