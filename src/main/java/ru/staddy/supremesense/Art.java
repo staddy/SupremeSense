@@ -6,6 +6,8 @@ import java.awt.image.BufferedImage;
 
 public class Art {
     public static BufferedImage[][] symbols = split(load("/res/symbols.png"), 6, 6);
+    public static BufferedImage bg = scale(load("/res/background.png"), 4);
+    public static BufferedImage titleScreen = load("/res/titlescreen.png");
 
     public static BufferedImage load(String name) {
         try {

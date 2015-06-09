@@ -5,7 +5,7 @@ import java.awt.event.KeyEvent;
 public class Input {
     public static final int MAX_KEYS = 16;
 
-    enum Key {  UP, DOWN, LEFT, RIGHT,
+    public enum Key {  UP, DOWN, LEFT, RIGHT,
                 JUMP, SHOOT,
                 ESCAPE
     }
@@ -43,6 +43,14 @@ public class Input {
         if (button >= 0) {
             buttons[button] = down;
         }
+    }
+    
+    public boolean getButton(Key key) {
+        return buttons[key.ordinal()];
+    }
+    
+    public boolean getOldButton(Key key) {
+        return oldButtons[key.ordinal()];
     }
 
     public void tick() {
