@@ -22,7 +22,7 @@ public class SupremeSense extends Applet implements Runnable, KeyListener {
 
     private boolean running = false;
     private Screen screen;
-    private ArrayList<Input> inputs = new ArrayList<Input>();
+    private ArrayList<Input> inputs = new ArrayList<>();
     private boolean started = false;
 
     public SupremeSense() {
@@ -66,7 +66,7 @@ public class SupremeSense extends Applet implements Runnable, KeyListener {
         requestFocus();
         Image image = new BufferedImage(320, 240, BufferedImage.TYPE_INT_RGB);
         setScreen(new TitleScreen(inputs));
-
+        
         long lastTime = System.nanoTime();
         long unprocessedTime = 0;
         try {
@@ -122,7 +122,11 @@ public class SupremeSense extends Applet implements Runnable, KeyListener {
     }
 
     public void setScreen(Screen screen) {
+        if(this.screen != null)
+            this.screen.removed();
         this.screen = screen;
+        if(screen != null)
+            this.screen.init(this);
     }
 
     public static void main(String[] args) {

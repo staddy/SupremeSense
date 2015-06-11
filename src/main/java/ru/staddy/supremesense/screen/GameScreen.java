@@ -11,7 +11,6 @@ import ru.staddy.supremesense.level.Camera;
 import ru.staddy.supremesense.level.Level;
 
 public class GameScreen extends Screen {
-    public static final int MAX_HATS = 7;
     
     private static final boolean DEBUG_MODE = false;
     private int xLevel = DEBUG_MODE?8:0;
@@ -25,13 +24,13 @@ public class GameScreen extends Screen {
     private int hatCount = 1;
 
     public GameScreen(ArrayList<Input> inputs) {
-        ArrayList<Entity> players = new ArrayList<Entity>();
+        ArrayList<Entity> players = new ArrayList<>();
+        players.add(new Player(20, 20));
         this.inputs = inputs;
         for(Entity p : players) {
             p.setInput(this.inputs.get(players.indexOf(p)));
         }
-        players.add(new Player(0, 0));
-        level = new Level(this, 32, 24, players.get(0), players);
+        level = new Level(this, 32, 48, players.get(0), players);
     }
 
     public void tick() {

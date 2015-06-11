@@ -33,14 +33,14 @@ public class TitleScreen extends Screen {
 
     public void tick() {
         time++;
-        if (time > 240) {
+        //if (time > 240) {
             if (inputs.get(0).getButton(Input.Key.SHOOT) && !inputs.get(0).getOldButton(Input.Key.SHOOT)) {
                 resetAnimation();
                 msg = "What does victory mean to you?";
-                //setScreen(new GameScreen());
+                setScreen(new GameScreen(inputs));
                 inputs.get(0).releaseAllKeys();
             }
-        }
+        //}
         if (time > 60*10) {
             //setScreen(new ExpositionScreen());
         }

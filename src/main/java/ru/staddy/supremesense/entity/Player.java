@@ -25,7 +25,7 @@ public class Player extends Entity {
         int xp = (int) x - (16 - w) / 2;
         int yp = (int) y - 2;
         g.fillRect(xp, yp, w, h);
-
+        
         //int stepFrame = frame / 4 % 4;
 
         /*BufferedImage[][] sheet = dir == 1 ? Art.player1 : Art.player2;

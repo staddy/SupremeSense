@@ -23,21 +23,23 @@ public class Level {
     private Random random = new Random(1000);
     private GameScreen screen;
     private int tick;
-    private List<Entity> hits = new ArrayList<Entity>();
+    private List<Entity> hits = new ArrayList<>();
 
     public Level(GameScreen screen, int w, int h, Entity cameraHolder, ArrayList<Entity> players) {
         this.screen = screen;
         this.cameraHolder = cameraHolder;
         this.players = players;
-        int[] pixels = new int[32 * 24];
+        for(Entity e : players)
+            add(e);
 
         walls = new byte[w * h];
+
         entityMap = new ArrayList[w * h];
         this.width = w;
         this.height = h;
         for (int y = 0; y < h; y++) {
             for (int x = 0; x < w; x++) {
-                entityMap[x + y * w] = new ArrayList<Entity>();
+                entityMap[x + y * w] = new ArrayList<>();
                 byte wall = 0;
                 walls[x + y * w] = wall;
             }
@@ -56,6 +58,8 @@ public class Level {
     }
     
     public void establishCamera(Camera camera) {
+        camera.x = 0;
+        camera.y = 0;
         camera.x = (int)(cameraHolder.x + cameraHolder.w / 2 - camera.width / 2);
         camera.y = (int)(cameraHolder.y + cameraHolder.h / 2 - camera.height / 2);
         int w = width * 10 * SupremeSense.SCREEN_SCALE;
@@ -134,8 +138,10 @@ public class Level {
                     int ximg = 0;
                     int yimg = 0;
                     byte w = walls[x + y * width];
-                    if (w == 0) yimg = 1;
-
+                    if (w == 1) {
+                        g.setColor(Color.blue);
+                        g.fillRect(x * 10, y * 10, 10, 10);
+                    }
                     //g.drawImage(Art.walls[ximg][yimg], x * 10, y * 10, null);
                 }
             }
