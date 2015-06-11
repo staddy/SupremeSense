@@ -1,6 +1,7 @@
 package ru.staddy.supremesense.screen;
 
 import java.awt.*;
+import java.util.ArrayList;
 import ru.staddy.supremesense.Art;
 import ru.staddy.supremesense.Input;
 
@@ -9,6 +10,10 @@ public class TitleScreen extends Screen {
 
     // DEBUG
     String msg = "PRESS X TO WIN";
+    
+    public TitleScreen(ArrayList<Input> inputs) {
+        this.inputs = inputs;
+    }
     
     public void render(Graphics g) {
         int yOffs = 480 - time * 2;
@@ -26,14 +31,14 @@ public class TitleScreen extends Screen {
         }
     }
 
-    public void tick(Input input) {
+    public void tick() {
         time++;
         if (time > 240) {
-            if (input.getButton(Input.Key.SHOOT) && !input.getOldButton(Input.Key.SHOOT)) {
+            if (inputs.get(0).getButton(Input.Key.SHOOT) && !inputs.get(0).getOldButton(Input.Key.SHOOT)) {
                 resetAnimation();
                 msg = "What does victory mean to you?";
                 //setScreen(new GameScreen());
-                input.releaseAllKeys();
+                inputs.get(0).releaseAllKeys();
             }
         }
         if (time > 60*10) {

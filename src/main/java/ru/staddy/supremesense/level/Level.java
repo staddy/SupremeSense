@@ -66,11 +66,8 @@ public class Level {
         else if(camera.y > (h - camera.height)) camera.y = (h - camera.height);
     }
 
-    public void tick(ArrayList<Input> inputs) {
+    public void tick() {
         tick++;
-        for(Entity p : players) {
-            p.setInput(inputs.get(players.indexOf(p)));
-        }
         for (int i = 0; i < entities.size(); i++) {
             Entity e = entities.get(i);
             int xSlotOld = e.xSlot;

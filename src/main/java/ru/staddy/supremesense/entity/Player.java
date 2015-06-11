@@ -80,8 +80,8 @@ public class Player extends Entity {
     }
 
     public void die() {
-        if (removed) return; 
-        remove();
+        if(!removed) 
+            remove();
     }
 
     public void outOfBounds() {

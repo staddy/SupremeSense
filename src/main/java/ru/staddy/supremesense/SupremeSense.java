@@ -10,6 +10,7 @@ import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 /**
  * Created by stad on 17.05.15.
@@ -21,17 +22,19 @@ public class SupremeSense extends Applet implements Runnable, KeyListener {
 
     private boolean running = false;
     private Screen screen;
-    private Input input = new Input();
+    private ArrayList<Input> inputs = new ArrayList<Input>();
     private boolean started = false;
 
     public SupremeSense() {
         setPreferredSize(new Dimension(GAME_WIDTH * SCREEN_SCALE, GAME_HEIGHT * SCREEN_SCALE));
         this.addKeyListener(this);
+        inputs.add(new Input());
         this.addFocusListener(new FocusListener() {
             public void focusGained(FocusEvent arg0) {
             }
             public void focusLost(FocusEvent arg0) {
-                input.releaseAllKeys();
+                for(Input i : inputs)
+                    i.releaseAllKeys();
             }
         });
     }
@@ -50,17 +53,19 @@ public class SupremeSense extends Applet implements Runnable, KeyListener {
     }
 
     public void keyPressed(KeyEvent e) {
-        input.set(e.getKeyCode(), true);
+        for(Input i : inputs)
+            i.set(e.getKeyCode(), true);
     }
 
     public void keyReleased(KeyEvent e) {
-        input.set(e.getKeyCode(), false);
+        for(Input i : inputs)
+            i.set(e.getKeyCode(), false);
     }
 
     public void run() {
         requestFocus();
         Image image = new BufferedImage(320, 240, BufferedImage.TYPE_INT_RGB);
-        setScreen(new TitleScreen());
+        setScreen(new TitleScreen(inputs));
 
         long lastTime = System.nanoTime();
         long unprocessedTime = 0;
@@ -80,8 +85,9 @@ public class SupremeSense extends Applet implements Runnable, KeyListener {
             int max = 10;
             while (unprocessedTime > 0) {
                 unprocessedTime -= 1000000000 / 60;
-                screen.tick(input);
-                input.tick();
+                screen.tick();
+                for(Input i : inputs)
+                    i.tick();
                 if (max-- == 0) {
                     unprocessedTime = 0;
                     break;

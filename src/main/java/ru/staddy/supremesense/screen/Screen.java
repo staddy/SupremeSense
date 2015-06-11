@@ -5,11 +5,14 @@ import ru.staddy.supremesense.Input;
 import ru.staddy.supremesense.SupremeSense;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Screen {
     protected static Random random = new Random();
     private SupremeSense supremeSense;
+    
+    ArrayList<Input> inputs;
     
     boolean animationStarted = false;
     boolean animationStopped = false;
@@ -84,6 +87,6 @@ public class Screen {
     public void render(Graphics g) {
     }
 
-    public void tick(Input input) {
+    public void tick() {
     }
 }

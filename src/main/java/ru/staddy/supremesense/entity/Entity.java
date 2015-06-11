@@ -85,7 +85,4 @@ public class Entity {
         if (y < 0) return;
         remove();
     }
-
-    public void collideMonster(Entity e) {
-    }
 }

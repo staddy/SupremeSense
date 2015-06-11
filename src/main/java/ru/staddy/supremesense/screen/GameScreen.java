@@ -24,14 +24,18 @@ public class GameScreen extends Screen {
     private int gunLevel = DEBUG_MODE?2:0;
     private int hatCount = 1;
 
-    public GameScreen() {
+    public GameScreen(ArrayList<Input> inputs) {
         ArrayList<Entity> players = new ArrayList<Entity>();
+        this.inputs = inputs;
+        for(Entity p : players) {
+            p.setInput(this.inputs.get(players.indexOf(p)));
+        }
         players.add(new Player(0, 0));
         level = new Level(this, 32, 24, players.get(0), players);
     }
 
-    public void tick(ArrayList<Input> inputs) {
-        level.tick(inputs);
+    public void tick() {
+        level.tick();
     }
 
     public void render(Graphics g) {
