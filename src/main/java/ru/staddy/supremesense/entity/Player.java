@@ -22,9 +22,7 @@ public class Player extends Entity {
 
     public void render(Graphics g, Camera camera) {
         g.setColor(Color.GREEN);
-        int xp = (int) x - (16 - w) / 2;
-        int yp = (int) y - 2;
-        g.fillRect(xp, yp, w, h);
+        g.fillRect((int)x, (int)y, w, h);
         
         //int stepFrame = frame / 4 % 4;
 
@@ -63,20 +61,20 @@ public class Player extends Entity {
         }
         if (walk) frame++;
         else frame = 0;
-        if (input.getButton(Input.Key.JUMP) && !input.getButton(Input.Key.JUMP) && onGround) {
-            ya -= 2 + Math.abs(xa) * 0.5;
+        if (input.getButton(Input.Key.JUMP) && !input.getOldButton(Input.Key.JUMP) && onGround) {
+            ya -= 5;// + Math.abs(xa) * 0.5;
         }
 
         tryMove(xa, ya);
 
         xa *= 0.7;
-        if (ya < 0 && input.getButton(Input.Key.JUMP)) {
+        /*if (ya < 0 && input.getButton(Input.Key.JUMP)) {
             ya *= 0.992;
             ya += Level.GRAVITY * 0.5;
-        } else {
+        } else {*/
             ya *= Level.FRICTION;
             ya += Level.GRAVITY;
-        }
+        //}
     }
 
     public void die() {

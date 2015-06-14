@@ -1,7 +1,10 @@
 package ru.staddy.supremesense.screen;
 
 import java.awt.*;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import ru.staddy.supremesense.Art;
 import ru.staddy.supremesense.Input;
 
@@ -37,7 +40,10 @@ public class TitleScreen extends Screen {
             if (inputs.get(0).getButton(Input.Key.SHOOT) && !inputs.get(0).getOldButton(Input.Key.SHOOT)) {
                 resetAnimation();
                 msg = "What does victory mean to you?";
+            try {
                 setScreen(new GameScreen(inputs));
+            } catch (IOException ex) {
+            }
                 inputs.get(0).releaseAllKeys();
             }
         //}

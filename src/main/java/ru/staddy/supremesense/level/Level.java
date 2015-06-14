@@ -1,17 +1,17 @@
 package ru.staddy.supremesense.level;
 
 import java.awt.*;
+import java.io.DataInputStream;
+import java.io.IOException;
 import java.util.*;
 import java.util.List;
-import ru.staddy.supremesense.Input;
-import ru.staddy.supremesense.SupremeSense;
 import ru.staddy.supremesense.entity.Entity;
 import ru.staddy.supremesense.screen.GameScreen;
 
 public class Level {
     public static final double FRICTION = 0.99;
-    public static final double GRAVITY = 0.10;
-    public List<Entity> entities = new ArrayList<Entity>();
+    public static final double GRAVITY = 0.40;
+    public List<Entity> entities = new ArrayList<>();
     public byte[] walls;
     public List<Entity>[] entityMap;
     private int width, height;
@@ -26,12 +26,20 @@ public class Level {
     private List<Entity> hits = new ArrayList<>();
 
     public Level(GameScreen screen, int w, int h, Entity cameraHolder, ArrayList<Entity> players) {
-        this.screen = screen;
-        this.cameraHolder = cameraHolder;
-        this.players = players;
-        for(Entity e : players)
-            add(e);
+        init(w, h, screen, cameraHolder, players);
+    }
+    
+    public Level(GameScreen screen, String fileName, Entity cameraHolder, ArrayList<Entity> players) throws IOException {
+        DataInputStream is = new DataInputStream(Level.class.getResourceAsStream(fileName));
+        int w = is.readInt();
+        int h = is.readInt();
+        init(w, h, screen, cameraHolder, players);
 
+        for(int i = 0; i < w * h; ++i)
+            walls[i] = is.readByte();
+    }
+    
+    final void init(int w, int h, GameScreen screen, Entity cameraHolder, ArrayList<Entity> players) {
         walls = new byte[w * h];
 
         entityMap = new ArrayList[w * h];
@@ -40,10 +48,15 @@ public class Level {
         for (int y = 0; y < h; y++) {
             for (int x = 0; x < w; x++) {
                 entityMap[x + y * w] = new ArrayList<>();
-                byte wall = 0;
-                walls[x + y * w] = wall;
+                walls[x + y * w] = 0;
             }
         }
+        
+        this.screen = screen;
+        this.cameraHolder = cameraHolder;
+        this.players = players;
+        for(Entity e : players)
+            add(e);
     }
 
     public void add(Entity e) {
@@ -58,12 +71,10 @@ public class Level {
     }
     
     public void establishCamera(Camera camera) {
-        camera.x = 0;
-        camera.y = 0;
         camera.x = (int)(cameraHolder.x + cameraHolder.w / 2 - camera.width / 2);
         camera.y = (int)(cameraHolder.y + cameraHolder.h / 2 - camera.height / 2);
-        int w = width * 10 * SupremeSense.SCREEN_SCALE;
-        int h = height * 10 * SupremeSense.SCREEN_SCALE;
+        int w = width * 10;
+        int h = height * 10;
         if(camera.x < 0) camera.x = 0;
         else if(camera.x > (w - camera.width)) camera.x = (w - camera.width);
         if(camera.y < 0) camera.y = 0;
@@ -175,5 +186,32 @@ public class Level {
             }
 
         return ok;
+    }
+    
+    public boolean isFree(double xc, double yc, int w, int h) {
+        double e = 0.1;
+        int x0 = (int) (xc / 10);
+        int y0 = (int) (yc / 10);
+        int x1 = (int) ((xc + w - e) / 10);
+        int y1 = (int) ((yc + h - e) / 10);
+        boolean ok = true;
+        for (int x = x0; x <= x1; x++)
+            for (int y = y0; y <= y1; y++) {
+                if (x >= 0 && y >= 0 && x < width && y < height) {
+                    byte ww = walls[x + y * width];
+                    if (ww != 0) ok = false;
+                }
+            }
+
+        return ok;
+    }
+    
+    public boolean isFree(Entity ee, double xc, double yc) {
+        return isFree(xc, yc, ee.w, ee.h);
+    }
+    
+    public void addBlock(int x, int y) {
+        if(x + y * width <= walls.length)
+            walls[x + y * width] = 1;
     }
 }

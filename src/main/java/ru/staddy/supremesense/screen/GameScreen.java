@@ -1,10 +1,12 @@
 package ru.staddy.supremesense.screen;
 
 import java.awt.Graphics;
+import java.io.IOException;
 import java.util.ArrayList;
 import ru.staddy.supremesense.Art;
 import ru.staddy.supremesense.Input;
 import ru.staddy.supremesense.SupremeSense;
+import ru.staddy.supremesense.entity.Crawler;
 import ru.staddy.supremesense.entity.Entity;
 import ru.staddy.supremesense.entity.Player;
 import ru.staddy.supremesense.level.Camera;
@@ -20,17 +22,16 @@ public class GameScreen extends Screen {
     private Camera camera = new Camera(SupremeSense.GAME_WIDTH, SupremeSense.GAME_HEIGHT);
 
     public boolean mayRespawn = false;
-    private int gunLevel = DEBUG_MODE?2:0;
-    private int hatCount = 1;
 
-    public GameScreen(ArrayList<Input> inputs) {
+    public GameScreen(ArrayList<Input> inputs) throws IOException {
         ArrayList<Entity> players = new ArrayList<>();
         players.add(new Player(20, 20));
         this.inputs = inputs;
         for(Entity p : players) {
             p.setInput(this.inputs.get(players.indexOf(p)));
         }
-        level = new Level(this, 32, 48, players.get(0), players);
+        level = new Level(this, "/res/level", players.get(0), players);
+        level.add(new Crawler(15, 10, true));
     }
 
     public void tick() {

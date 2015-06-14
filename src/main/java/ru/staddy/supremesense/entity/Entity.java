@@ -10,7 +10,7 @@ public class Entity {
     protected boolean onGround = false;
     protected static Random random = new Random();
 
-    public double xa, ya;
+    public double xa = 0, ya = 0;
     public double x, y;
     protected double bounce = 0.05;
     public int w = 10, h = 10;
@@ -18,8 +18,6 @@ public class Entity {
     protected Level level;
     public boolean removed = false;
     public int xSlot, ySlot;
-
-    public boolean interactsWithWorld = false;
 
     Input input;
     
