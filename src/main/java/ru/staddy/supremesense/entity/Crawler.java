@@ -78,9 +78,9 @@ public class Crawler extends Entity {
     }
     
     @Override
-    public boolean catchMind(Entity e) {
+    public boolean catchMind(Entity e, Input input) {
         host = e;
-        this.input = e.input;
+        this.input = input;
         level.cameraHolder = this;
         isControlled = true;
         return true;

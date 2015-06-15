@@ -90,7 +90,7 @@ public class Entity {
         return false;
     }
     
-    public boolean catchMind(Entity e) {
+    public boolean catchMind(Entity e, Input input) {
         return false;
     }
 }

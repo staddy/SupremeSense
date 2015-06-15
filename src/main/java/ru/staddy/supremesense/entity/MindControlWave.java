@@ -7,6 +7,7 @@ public class MindControlWave extends Wave {
 
     public MindControlWave(Entity source, double x, double y, double xa, double ya) {
         super(source, x, y, xa, ya);
+        this.input = source.input;
     }
     
     @Override
@@ -17,7 +18,7 @@ public class MindControlWave extends Wave {
             Entity e = entities.get(i);
             if (source==e) continue;
 
-            if (e.catchMind(source)) {
+            if (e.catchMind(source, input)) {
                 source.input = null;
                 remove();
                 break;
