@@ -21,6 +21,8 @@ public class Entity {
 
     Input input;
     
+    Entity host;
+    
     public void init(Level level) {
         this.level = level;
     }
@@ -82,5 +84,13 @@ public class Entity {
     public void outOfBounds() {
         if (y < 0) return;
         remove();
+    }
+    
+    public boolean shot(Entity bullet) {
+        return false;
+    }
+    
+    public boolean catchMind(Entity e) {
+        return false;
     }
 }

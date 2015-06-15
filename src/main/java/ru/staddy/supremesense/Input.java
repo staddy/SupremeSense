@@ -6,13 +6,15 @@ public class Input {
     public static final int MAX_KEYS = 16;
 
     public enum Key {  UP, DOWN, LEFT, RIGHT,
-                JUMP, SHOOT,
+                JUMP, SHOOT, WAVE,
                 ESCAPE
     }
 
     public boolean[] buttons = new boolean[MAX_KEYS];
     public boolean[] oldButtons = new boolean[MAX_KEYS];
 
+    public int x = 0, y = 0;
+    
     public void set(int key, boolean down) {
         int button = -1;
 
@@ -34,6 +36,9 @@ public class Input {
                 break;
             case KeyEvent.VK_X:
                 button = Key.SHOOT.ordinal();
+                break;
+            case KeyEvent.VK_A:
+                button = Key.WAVE.ordinal();
                 break;
             case KeyEvent.VK_ESCAPE:
                 button = Key.ESCAPE.ordinal();

@@ -10,7 +10,7 @@ import ru.staddy.supremesense.screen.GameScreen;
 
 public class Level {
     public static final double FRICTION = 0.99;
-    public static final double GRAVITY = 0.40;
+    public static final double GRAVITY = 0.3;
     public List<Entity> entities = new ArrayList<>();
     public byte[] walls;
     public List<Entity>[] entityMap;

@@ -9,16 +9,15 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-/**
- * Created by stad on 17.05.15.
- */
-public class SupremeSense extends Applet implements Runnable, KeyListener {
+public class SupremeSense extends Applet implements Runnable, KeyListener, MouseListener {
     public static final int GAME_WIDTH = 320;
     public static final int GAME_HEIGHT = 240;
-    public static final int SCREEN_SCALE = 2;
+    public static final int SCREEN_SCALE = 3;
 
     private boolean running = false;
     private Screen screen;
@@ -28,13 +27,13 @@ public class SupremeSense extends Applet implements Runnable, KeyListener {
     public SupremeSense() {
         setPreferredSize(new Dimension(GAME_WIDTH * SCREEN_SCALE, GAME_HEIGHT * SCREEN_SCALE));
         this.addKeyListener(this);
+        this.addMouseListener(this);
         inputs.add(new Input());
         this.addFocusListener(new FocusListener() {
             public void focusGained(FocusEvent arg0) {
             }
             public void focusLost(FocusEvent arg0) {
-                for(Input i : inputs)
-                    i.releaseAllKeys();
+                inputs.get(0).releaseAllKeys();
             }
         });
     }
@@ -53,13 +52,11 @@ public class SupremeSense extends Applet implements Runnable, KeyListener {
     }
 
     public void keyPressed(KeyEvent e) {
-        for(Input i : inputs)
-            i.set(e.getKeyCode(), true);
+        inputs.get(0).set(e.getKeyCode(), true);
     }
 
     public void keyReleased(KeyEvent e) {
-        for(Input i : inputs)
-            i.set(e.getKeyCode(), false);
+        inputs.get(0).set(e.getKeyCode(), false);
     }
 
     public void run() {
@@ -141,5 +138,29 @@ public class SupremeSense extends Applet implements Runnable, KeyListener {
         frame.setVisible(true);
 
         supremeSense.start();
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        inputs.get(0).x = e.getX() / SCREEN_SCALE;
+        inputs.get(0).y = e.getY() / SCREEN_SCALE;
+        inputs.get(0).set(KeyEvent.VK_X, true);
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        inputs.get(0).set(KeyEvent.VK_X, false);
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
     }
 }

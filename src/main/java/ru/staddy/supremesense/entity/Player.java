@@ -11,6 +11,8 @@ public class Player extends Entity {
     private int dir = 1;
     private int yAim = 0;
     private int frame = 0;
+    
+    int cx = 0, cy = 0;
 
     public Player(int x, int y) {
         this.x = x;
@@ -23,6 +25,8 @@ public class Player extends Entity {
     public void render(Graphics g, Camera camera) {
         g.setColor(Color.GREEN);
         g.fillRect((int)x, (int)y, w, h);
+        cx = camera.x;
+        cy = camera.y;
         
         //int stepFrame = frame / 4 % 4;
 
@@ -40,28 +44,40 @@ public class Player extends Entity {
         double speed = 0.4;
         double aimAngle = -0.2;
         yAim = 0;
-        if (input.getButton(Input.Key.UP)) {
+        if (input != null && input.getButton(Input.Key.UP)) {
             aimAngle -= 0.8;
             yAim--;
         }
-        if (input.getButton(Input.Key.DOWN)) {
+        if (input != null && input.getButton(Input.Key.DOWN)) {
             aimAngle += 0.8;
             yAim++;
         }
         boolean walk = false;
-        if (input.getButton(Input.Key.LEFT)) {
+        if (input != null && input.getButton(Input.Key.LEFT)) {
             walk = true;
             xa -= speed;
             dir = -1;
         }
-        if (input.getButton(Input.Key.RIGHT)) {
+        if (input != null && input.getButton(Input.Key.RIGHT)) {
             walk = true;
             xa += speed;
             dir = 1;
         }
+        if (input != null && input.getButton(Input.Key.SHOOT) && !input.getOldButton(Input.Key.SHOOT)) {
+            double k = ((double)(cy + input.y - y) / (cx + input.x - x));
+            double bxa = Math.sqrt(64.0 / (1 + k*k)) * (cx + input.x - x > 0 ? 1 : -1);
+            double bya = bxa * k;
+            level.add(new Bullet(this, x, y, bxa, bya));
+        }
+        if (input != null && input.getButton(Input.Key.WAVE) && !input.getOldButton(Input.Key.WAVE)) {
+            double k = ((double)(cy + input.y - y) / (cx + input.x - x));
+            double bxa = Math.sqrt(8.0 / (1 + k*k)) * (cx + input.x - x > 0 ? 1 : -1);
+            double bya = bxa * k;
+            level.add(new MindControlWave(this, x, y, bxa, bya));
+        }
         if (walk) frame++;
         else frame = 0;
-        if (input.getButton(Input.Key.JUMP) && !input.getOldButton(Input.Key.JUMP) && onGround) {
+        if (input != null && input.getButton(Input.Key.JUMP) && !input.getOldButton(Input.Key.JUMP) && onGround) {
             ya -= 5;// + Math.abs(xa) * 0.5;
         }
 
