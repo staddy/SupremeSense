@@ -60,7 +60,7 @@ public class Crawler extends Entity {
     
     @Override
     public void render(Graphics g, Camera camera) {
-        frame = (int)Math.round(x) % 4;
+        frame = Math.abs((int)Math.round(x) % 4);
         if(direction)
             g.drawImage(Art.monsters1[frame][0], (int)x, (int)y, null);
         else
