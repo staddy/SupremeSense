@@ -1,7 +1,6 @@
 package ru.staddy.supremesense.entity;
 
 import java.util.List;
-import ru.staddy.supremesense.Input;
 
 public class MindControlWave extends Wave {
 

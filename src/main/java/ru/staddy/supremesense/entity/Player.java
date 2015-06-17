@@ -74,6 +74,7 @@ public class Player extends Entity {
             double bxa = Math.sqrt(8.0 / (1 + k*k)) * (cx + input.x - x > 0 ? 1 : -1);
             double bya = bxa * k;
             level.add(new MindControlWave(this, x, y, bxa, bya));
+            input.set(Input.Key.WAVE, false);
         }
         if (walk) frame++;
         else frame = 0;

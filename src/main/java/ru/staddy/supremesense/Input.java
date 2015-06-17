@@ -50,6 +50,10 @@ public class Input {
         }
     }
     
+    public void set(Key k, boolean down) {
+        buttons[k.ordinal()] = down;
+    }
+    
     public boolean getButton(Key key) {
         return buttons[key.ordinal()];
     }

@@ -8,6 +8,7 @@ import ru.staddy.supremesense.Input;
 import ru.staddy.supremesense.SupremeSense;
 import ru.staddy.supremesense.entity.Crawler;
 import ru.staddy.supremesense.entity.Entity;
+import ru.staddy.supremesense.entity.Locust;
 import ru.staddy.supremesense.entity.Player;
 import ru.staddy.supremesense.level.Camera;
 import ru.staddy.supremesense.level.Level;
@@ -32,6 +33,10 @@ public class GameScreen extends Screen {
         }
         level = new Level(this, "/res/level", players.get(0), players);
         level.add(new Crawler(15, 10, true));
+        level.add(new Locust(15, 10, true));
+        level.add(new Locust(15, 10, true));
+        level.add(new Locust(15, 10, true));
+        level.add(new Locust(15, 10, true));
     }
 
     public void tick() {
