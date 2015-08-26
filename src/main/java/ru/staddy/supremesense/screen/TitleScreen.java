@@ -12,7 +12,7 @@ public class TitleScreen extends Screen {
     private int time = 0;
 
     // DEBUG
-    String msg = "PRESS X TO WIN";
+    String msg = "PRESS X TO CONTINUE";
     
     public TitleScreen(ArrayList<Input> inputs) {
         this.inputs = inputs;
@@ -22,14 +22,14 @@ public class TitleScreen extends Screen {
         int yOffs = 480 - time * 2;
         if (yOffs < 0) yOffs = 0;
         g.drawImage(Art.bg, 0, -yOffs / 2, null);
-        g.drawImage(Art.titleScreen, 0, -yOffs, null);
+        //g.drawImage(Art.titleScreen, 0, -yOffs, null);
         if (time > 240) {
             //drawAnimatedString(msg, g, 160 - msg.length() * 3, 140 - 3 - (int) (Math.abs(Math.sin(time * 0.1) * 10)));
             int rnd = random.nextInt(37);
             drawAnimatedString(msg, g, 160 - msg.length() * 3 - (((time % 5 + rnd) > 35) ? 2 : 0), 140 - 3 - (((time % 5 + rnd) > 35) ? 2 : 0));
         }
         if (time >=0) {
-            String copyright = "COPYRIGHT STADDY 2015";
+            String copyright = "2015";
             drawString(copyright, g, 2, 240-6-2);
         }
     }

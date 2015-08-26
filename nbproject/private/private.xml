@@ -2,14 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/home/stad/Documents/Projects/SupremeSense/src/main/java/ru/staddy/supremesense/entity/Bullet.java</file>
-            <file>file:/home/stad/Documents/Projects/SupremeSense/src/main/java/ru/staddy/supremesense/entity/Player.java</file>
-            <file>file:/home/stad/Documents/Projects/SupremeSense/src/main/java/ru/staddy/supremesense/SupremeSense.java</file>
-            <file>file:/home/stad/Documents/Projects/SupremeSense/src/main/java/ru/staddy/supremesense/entity/Crawler.java</file>
-            <file>file:/home/stad/Documents/Projects/SupremeSense/src/main/java/ru/staddy/supremesense/Input.java</file>
-            <file>file:/home/stad/Documents/Projects/SupremeSense/src/main/java/ru/staddy/supremesense/entity/Entity.java</file>
-            <file>file:/home/stad/Documents/Projects/SupremeSense/src/main/java/ru/staddy/supremesense/level/Level.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

@@ -67,11 +67,12 @@ public class Locust extends Entity {
     
     @Override
     public void render(Graphics g, Camera camera) {
+        int s = (onGround ? 1 : 2);
         frame = Math.abs((int)Math.round(x) / 3 % 4);
         if(direction)
-            g.drawImage(Art.monsters1[frame][1], (int)x, (int)y, null);
+            g.drawImage(Art.monsters1[frame][s], (int)x, (int)y, null);
         else
-            g.drawImage(Art.monsters2[frame][1], (int)x, (int)y, null);
+            g.drawImage(Art.monsters2[frame][s], (int)x, (int)y, null);
     }
     
     @Override
